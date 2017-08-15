@@ -65,7 +65,64 @@ front-end interview 汇总（前端面试汇总2017）
 
 - new 操作符具体干了什么呢?
 
-  1. AJAX 不支持浏览器 back 按钮。
-  1. 安全问题 AJAX 暴露了与服务器交互的细节。
-  1. 对搜索引擎的支持比较弱。不会执行你的 JS 脚本，只会操作你的网页源代码；
-  1. 跨域请求有一定限制。解决方式：jsonp；
+  1. 创建一个新对象；
+  1. 把函数中上下文（作用域）对象this指向该对象；
+  1. 执行代码，通过this给新对象添加属性或方法；
+  1. 返回对象；
+
+- null 和 undefined 的区别？
+
+  - null： null表示空值，转为数值时为0；
+
+  - undefined：undefined表示"缺少值"，就是此处应该有一个值，但是还没有定义。
+
+    1. 变量被声明了，但没有赋值时，就等于undefined。
+    1. 对象没有赋值的属性，该属性的值为undefined。
+    1. 函数没有返回值时，默认返回undefined。
+
+- this的原理
+  
+  [引用地址](http://blog.anchengjian.com/#/posts/2016/js中this的一些总结.md) 
+
+- 数据类型
+  
+  undefined 派生自 null 所以ECMAScript262 规定 undefined == null
+
+- 理解this
+  
+  [彻底理解this](http://blog.anchengjian.com/#/posts/2016/js中this的一些总结.md)
+
+  > 一些重点
+  ECMAScript 5 引入了 Function.prototype.bind。调用 fn.bind(someObject) 方法会创建并返回一个与 fn 具有相同函数体和作用域的函数，但是在这个新函数中，this 将永久地被绑定到了 bind 的第一个参数，无论这个函数是如何被调用的。
+
+- 闭包
+
+- new 操作符具体干了什么呢？
+
+  new共经历了四个过程。
+
+  ```javascript
+  var fn = function () { };
+  var fnObj = new fn();
+  ```
+
+  1. 创建了一个空对象
+  ```javascript
+  var obj = new object();
+  ```
+  2. 设置原型链
+  ```javascript
+  obj._proto_ = fn.prototype;
+  ```
+  3. 让fn的this指向obj，并执行fn的函数体
+  ```javascript
+  var result = fn.call(obj);
+  ```
+  4. 判断fn的返回值类型，如果是值类型，返回obj。如果是引用类型，就返回这个引用类型的对象。
+  ```javascript
+  if (typeof(result) == "object"){  
+      fnObj = result;  
+  } else {  
+      fnObj = obj;
+  }  
+  ```
