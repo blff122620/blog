@@ -126,3 +126,108 @@ front-end interview 汇总（前端面试汇总2017）
       fnObj = obj;
   }  
   ```
+
+- 编写一个方法 求一个字符串的字节长度
+
+  ```javacsript
+    //ES6有一些新的增加方法，对于4字节有支持String.fromCodePoint s.codePointAt()
+    function getBytes(str){
+    const byte2 = 255,
+      byte4 = 65535;
+    let size = 0;
+    for(let i =0; i<str.length; i++){
+      
+      if(str[i] > byte2){
+        size += 2;
+      }
+      else{
+        size += 1;
+      }
+    }
+    return size;
+  }
+
+  console.log('结果：',getBytes('爱𠮷你一万年1234') );
+  ```
+
+- 深度拷贝、浅拷贝、extend
+
+  [github上的一种实现](https://github.com/wengjq/Blog/issues/3link)
+
+  ```javascript
+  // 自己实现了一把
+  let my = (()=>{
+    const types = 'Undefined Boolean Number String Function Object Null Date RegExp Array Symbol'.split(' ');
+    const my = {};
+    function getType(){
+      return Object.prototype.toString.call(this).slice(8,-1);
+    }
+    types.forEach((type,i) => {
+      my[`is${type}`] = ((self) => {
+        return (elem) => {
+          return getType.call(elem) === self;
+        };
+      })(type);
+    });
+    return my;
+  })();
+
+  function copy(obj,deep){
+    let target ,value;
+    if(obj === null || (typeof obj != 'object' && !my.isFunction(obj))){
+      return obj;
+    }
+    else if(my.isFunction(obj)){
+      return new Function(`return ${obj.toString()}`)();
+    }
+    else if(my.isDate(obj)){
+      return new Date(obj);
+    }
+    else if(my.isRegExp(obj)){
+      return new RegExp(obj);
+    }
+    else if(my.isObject(obj) || my.isArray(obj)){
+      target = my.isArray(obj) ? [] : {};
+      for(let key in obj){
+        value = obj[key];
+        if(value === obj){
+          continue;
+        }
+        if(deep && (my.isArray(value) || my.isObject(value))){
+          target[key] = copy(value,deep);
+        }
+        else{
+          target[key] = value;
+        }
+        
+      }
+      return target;
+    }
+  }
+
+  function extend(...args){
+    let deep, 
+      target = args[0] || {},
+      src,
+      key,
+      option,
+      value,//对象value值
+      index = 1;
+    const len = args.length;
+    if(typeof args[0] === 'boolean'){
+      deep = true;
+      target = args[1] || {};
+      index += 1;
+    }
+    for(;index<len;index++){
+      // 开始循环扩展每个形参
+      option = args[index];
+      
+      src = copy(option,deep);
+      for(key in src){
+        target[key] = src[key];
+      }
+    }
+    return target;
+  }
+  ```
