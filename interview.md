@@ -461,4 +461,127 @@ let factorialM = (() => {
 })();
 
 
+// 自己实现一个reduce函数
+let reduce = (()=>{
+  let index = 0,
+    prev;
+  let redu = (fn,arr) => {
+    if(arr.length === 0){
+      index = 0;
+      return ;
+    }
+    if(arr.length === 1){
+      index = 0;
+      return arr[0];
+    }
+    
+    prev = fn(arr[0],arr[1],index++,arr);
+    arr.splice(0,2,prev);
+    return reduce(fn,arr); 
+  };
+  return redu;
+})();
+
+function add(a,b,index,arr){
+  console.log(`prev：${a},next:${b},index:${index},arr:${arr}`);
+  return a+b;
+}
+
+reduce(add,[1,2,3,4]) ; // 返回10
+
+
+// 自己实现一个reduce函数，改进版
+let reduce = (()=>{
+  let index = 0,
+    prev;
+  let redu = function(...args){
+    if(args.length >=2){
+      prev = args[1];//有初始值的情况
+      if(this.length == 0){
+        return prev;
+      }
+    }
+    else{
+      if(this.length == 0){
+        return '出错了，啥都没有';
+      }
+      if(this.length == 1){
+        return this[0];
+      }
+
+      prev = this[index];
+      index += 1;
+    }
+    
+    while(index < this.length){
+      if(index in this){
+        prev = args[0].call(this,prev,this[index],index,this);
+      }
+      index += 1;
+    }
+    index = 0;//恢复
+    return prev;
+  };
+  return redu;
+})();
+
+function add(a,b,index,arr){
+  console.log(`prev：${a},next:${b},index:${index},arr:${arr}`);
+  return a+b;
+}
+
+reduce.call([1,2,3,4],add) ; // 返回10
+
+
+// 自己实现一个reduce函数 箭头函数this不能改变，所以自己改了一下
+let reduce = ((that)=>{
+  let index = 0,
+    prev;
+  let redu = (...args) => {
+    if(args.length >=2){
+      prev = args[1];//有初始值的情况
+      
+      if(that.length == 0){
+        return prev;
+      }
+    }
+    else{
+      
+      if(that.length == 0){
+        return '出错了，啥都没有';
+      }
+      if(that.length == 1){
+        return that[0];
+      }
+
+      prev = that[index];
+      index += 1;
+    }
+    
+    while(index < that.length){
+      if(index in that){
+        prev = args[0].call(that,prev,that[index],index,that);
+      }
+      index += 1;
+    }
+    index = 0;//恢复
+    return prev;
+  };
+  return redu;
+});
+
+function add(a,b,index,arr){
+  console.log(`prev：${a},next:${b},index:${index},arr:${arr}`);
+  return a+b;
+}
+
+reduce([1,2,3,4])(add) ; // 返回10
+
+
 ```
+
+- 箭头函数里的this
+
+  “箭头函数”的this，总是指向定义时所在的对象，而不是运行时所在的对象。
+
+  [阮一峰的这个箭头函数的this讲得好](https://github.com/ruanyf/es6tutorial/issues/150)
