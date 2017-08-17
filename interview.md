@@ -63,13 +63,6 @@
   对搜索引擎的支持比较弱。不会执行你的 JS 脚本，只会操作你的网页源代码；
   跨域请求有一定限制。解决方式：jsonp；
 
-- new 操作符具体干了什么呢?
-
-  1. 创建一个新对象；
-  1. 把函数中上下文（作用域）对象this指向该对象；
-  1. 执行代码，通过this给新对象添加属性或方法；
-  1. 返回对象；
-
 - null 和 undefined 的区别？
 
   - null： null表示空值，转为数值时为0；
@@ -665,4 +658,53 @@ reduce([1,2,3,4])(add) ; // 返回10
   - 后处理器例如：PostCSS，通常被视为在完成的样式表中根据CSS规范处理CSS，让其更有效；目前最常做的
     是给CSS属性添加浏览器私有前缀，实现跨浏览器兼容性的问题。
 
+- # 如何将浮点数点左边的数每三位添加一个逗号，如12000000.11转化为『12,000,000.11』? 【研究正则写法】
 
+  > [参考string.replace](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace)
+
+  ```javascript
+  function commafy(num){
+    return num && num
+      .toString()
+      .replace(/(\d)(?=(\d{3})+\.)/g, function($1, $2){
+        return $2 + ',';
+      });
+  }
+  ```
+- 在事件中，this指向触发这个事件的对象，特殊的是，IE中的attachEvent中的this总是指向全局对象Window；
+
+- # 获取event对象的引用
+
+  ```javascript
+  // 获取event对象的引用，取到事件的所有信息，确保随时能使用event；
+    getEvent : function(e) {
+      var ev = e || window.event;
+      if (!ev) {
+        var c = this.getEvent.caller;
+        while (c) {
+          ev = c.arguments[0];
+          if (ev && Event == ev.constructor) {
+            break;
+          }
+          c = c.caller;
+        }
+      }
+      return ev;
+    }
+  ```
+
+- # JS模块加载器的轮子怎么造，也就是如何实现一个模块加载器？
+
+- # 移动端最小触控区域是多大？
+
+- # 移动端的点击事件的有延迟，时间是多久，为什么会有？ 怎么解决这个延时？（click 有 300ms 延迟,为了实现safari的双击事件的设计，浏览器要知道你是不是要双击操作。）
+
+  [参考地址](https://thx.github.io/mobile/300ms-click-delay)
+
+- # 前端路由
+
+  [前端路由参考](https://segmentfault.com/a/1190000007238999)
+
+- # 移动前端开发和 Web 前端开发的区别是什么？
+
+  [比较](https://www.zhihu.com/question/20269059)
