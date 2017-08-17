@@ -1,4 +1,4 @@
-front-end interview 汇总（前端面试汇总2017）
+# front-end interview 汇总（前端面试汇总2017）
 
 - JavaScript 的 typeof 返回哪些数据类型？
 
@@ -585,3 +585,16 @@ reduce([1,2,3,4])(add) ; // 返回10
   “箭头函数”的this，总是指向定义时所在的对象，而不是运行时所在的对象。
 
   [阮一峰的这个箭头函数的this讲得好](https://github.com/ruanyf/es6tutorial/issues/150)
+
+  ```javascript
+
+  // 彻底理解this
+  function underThis(){
+    console.log('outer',this);
+    var that = this;
+    return function hi(){
+      console.log('hi',that)
+      return this;
+    }
+  }
+  ```
