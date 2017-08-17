@@ -231,3 +231,177 @@ front-end interview 汇总（前端面试汇总2017）
     return target;
   }
   ```
+
+- 请给出异步加载js方案
+
+  异步加载方式：
+  defer，
+  async：
+  创建script，插入到DOM中，加载完毕后callBack，见代码：
+  ```javascript
+  function loadScript(url, callback){
+    var script = document.createElement("script")
+    script.type = "text/javascript";
+    if(script.readyState){ //IE
+      script.onreadystatechange = function(){
+        if (script.readyState == "loaded" ||script.readyState == "complete"){
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } 
+    else {
+    // Others: Firefox, Safari, Chrome, and Opera
+      script.onload = function(){
+        callback();
+      };
+    }
+    script.src = url;
+    document.body.appendChild(script);
+  }
+  ```
+
+- 一些代码实现
+
+```javascript
+
+// 转换url search为对象形式
+function parseQueryString(search){
+  let query = decodeURIComponent(search).split('?')[1],
+    output = {},
+    key,
+    value;
+  if(!query){
+    return {};
+  }
+  query.split('&').forEach((item) => {
+    [key,value] = item.split('=');
+    if(typeof value === 'undefined'){
+      // 等号右边没有数值，那么默认就是true值
+      value = true;
+    }
+    output[key] = value;
+  });
+  return output;
+}
+
+// 实现array forEach
+function forEach(fn){
+  for(let i=0; i<this.length; i++){
+    fn(this[i],i,this);
+  }
+}
+
+// 判断是不是质数
+function isPrime(num){
+  let index = num - 1;
+  for(;index>1;index--){
+    if(num%index === 0){
+      return false;
+    }
+  }
+  return true;
+}
+
+// 删除数组重复元素，利用hash，空间增大，减少时间复杂度
+function delDul(arr){
+  let tmp = {};
+  return arr.filter((item) => {
+    if(item in tmp){
+      return false;
+    }
+    tmp[item] = item;
+    return true;
+  });
+}
+
+// 插入排序的实现
+function sort(arr){
+  let i,j;
+  for(i=1; i<arr.length; i++){
+    for(j=0; j<i; j++){
+      if(arr[i] < arr[j]){
+        arr.splice(j,0,arr[i]);
+        arr.splice(i+1,1);
+        break;
+      }
+    }
+  }
+  return arr;
+}
+
+// 快速排序的递归实现
+function quick(){
+  let pivot = this[0];
+  let left = [],
+    right = [];
+  if(this.length <= 1){
+    return this;
+  }
+  this.forEach((item,index) => {
+    if(index == 0){
+      return;
+    }
+    if(item > pivot){
+      right.push(item);
+    }
+    else{
+      left.push(item)
+    }
+  });
+
+  return quick.call(left).concat(pivot,quick.call(right));
+}
+
+// 获取字符串中字符出现的总次数，
+function getDul(){
+  let chars = {};
+  Array.prototype.slice.call(this).forEach((item) => {
+    if(item in chars){
+      chars[item] += 1;
+    }
+    else{
+      chars[item] = 1;
+    }
+  });
+  let charsA = [];
+  for(let key in chars){
+    charsA.push({key:key,times:chars[key]});
+    console.log(`${key}出现了${chars[key]}次`);
+  }
+  return charsA;
+}
+
+// bind的普通实现
+function bind(obj,fn){
+  return function(){
+    return fn.apply(obj,arguments);
+  }
+}
+
+// curry化的通用实现
+function curry(...args){
+  let outerArgs = args.slice(1);
+  return (...innerArgs) => {
+    let finalArgs = outerArgs.concat(innerArgs);
+    return args[0].apply(null,finalArgs);
+  }
+}
+
+// 函数curry化，实现add(1)(2)(3)(4)(5)(6) 无限加
+function add(num){
+  let helper = function(next){
+    num = typeof next === 'undefined' ? num : num + next;
+    return helper;
+  };
+  helper.valueOf = () => {
+    return num;
+  };
+  return helper;
+}
+
+// add = (a,b) => {return a+b;};
+// curry(add,3)  变成了函数 x  外层包含了3 需要调用x(5)这样就是调用了add(3,5)
+// 如果在curry(x,5) 变成了函数y 外层包含了5 需要调用y()相当于调用了x(5)相当于调用了add(3,5)
+
+```
