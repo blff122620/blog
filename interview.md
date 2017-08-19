@@ -408,6 +408,21 @@ function curryBind(...args){
   }
 }
 
+// 支持new的 currybind
+Function.prototype.bind = Function.prototype.bind || function(ctx,...args){
+  if(typeof this !== 'function'){
+    return 'bind对象应该为函数';
+  }
+  let fBind = this,
+    FNOP = function(){},// 用于判别是否是new操作的instanceof作用
+    bound = function(...innerArgs){
+     return fBind.apply(this instanceof FNOP ? this : (ctx || {}), args.concat(innerArgs));     
+    };
+    FNOP.prototype = fBind.prototype;
+    bound.prototype = new FNOP(); // 原型式继承
+    return bound;
+};
+
 
 // 没有记忆函数的实现,阶乘的实现
 let factorial = (() => {
@@ -708,3 +723,15 @@ reduce([1,2,3,4])(add) ; // 返回10
 - # 移动前端开发和 Web 前端开发的区别是什么？
 
   [比较](https://www.zhihu.com/question/20269059)
+
+- 前端面试题，利用给定接口获得闭包内部对象
+
+  [连接地址](https://segmentfault.com/q/1010000002916478)
+
+- 前端疑难杂症
+
+  [参考地址](https://juejin.im/entry/58bcf765a22b9d005eef5623)
+
+- 备注
+
+  [面试备注](https://segmentfault.com/a/1190000009200927)
