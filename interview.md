@@ -735,3 +735,131 @@ reduce([1,2,3,4])(add) ; // 返回10
 - 备注
 
   [面试备注](https://segmentfault.com/a/1190000009200927)
+
+- 实现一个LazyMan 
+
+  > 实现一个LazyMan，可以按照以下方式调用:
+  
+  LazyMan("Hank")输出:
+  
+  Hi! This is Hank!
+   
+  LazyMan("Hank").sleep(10).eat("dinner")输出
+  
+  Hi! This is Hank!
+  
+  //等待10秒..
+  
+  Wake up after 10
+  
+  Eat dinner~
+   
+  LazyMan("Hank").eat("dinner").eat("supper")输出
+  
+  Hi This is Hank!
+  
+  Eat dinner~
+  
+  Eat supper~
+   
+  LazyMan("Hank").sleepFirst(5).eat("supper")输出
+  
+  //等待5秒
+  
+  Wake up after 5
+  
+  Hi This is Hank!
+  
+  Eat supper
+   
+  以此类推。
+
+  ```javascript
+
+  (function(window){
+    let tasklist = [],
+      param;
+    function subscribe(fn,...args){
+      param = {
+        fn: fn,
+        args: args,
+      };
+      if(fn === 'sleepFirst'){
+
+        tasklist.unshift(param);
+      }
+      else{
+        tasklist.push(param);
+      }
+    };
+    function publish(){
+      if(tasklist.length > 0){
+        run(tasklist.shift());
+      }
+    }
+    function run(task){
+      let func = task.fn,
+        args = task.args;
+      switch(func){
+        case 'eat': 
+          eat.apply(null,args);
+          break;
+        case 'sleep': 
+          sleep.apply(null,args);
+          break;
+        case 'sleepFirst': 
+          sleepFirst.apply(null,args);
+          break;
+        case 'lazyMan': 
+          lazyMan.apply(null,args);
+          break;
+      }
+    }
+    const LazyMan = function(){};
+    LazyMan.prototype.eat = function(str){
+      subscribe('eat',str);
+      return this;
+    }
+    LazyMan.prototype.sleep = function(time){
+      subscribe('sleep',time);
+      return this;
+    }
+    LazyMan.prototype.sleepFirst = function(time){
+      subscribe('sleepFirst',time);
+      return this;
+    }
+
+    function log(str){
+      console.log(str);
+    }
+    function lazyMan(name){
+      log(`Hi!This is ${name}!`);
+      publish();
+    }
+    function eat(str){
+      log(`eat ${str}`);
+      publish();
+    }
+    function sleep(time){
+      setTimeout(() => {
+        log("Wake up after "+ time);
+        publish();
+      }, time * 1000);
+    }
+    function sleepFirst(time){
+      setTimeout(() => {
+        log("Wake up after "+ time);
+        publish();
+      }, time * 1000); 
+    }
+
+    window.LazyMan = function(name){
+      subscribe("lazyMan", name);
+      setTimeout(function(){
+        publish();
+      }, 0);
+      return new LazyMan();
+    };
+  })(window);
+
+  ```
