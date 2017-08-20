@@ -863,3 +863,95 @@ reduce([1,2,3,4])(add) ; // 返回10
   })(window);
 
   ```
+
+- css flex
+
+  > [一劳永逸flex](https://juejin.im/post/58e3a5a0a0bb9f0069fc16bb)
+
+  首先说下flex的相关的css属性吧，display:flex,首先要设置这个，将dom元素变为FFC。
+  
+  主轴方向利用参数 justify-content: 用的最多的可能就是center了，flex-start(默认值), flex-end，space-between,space-around 这两个并不常用
+
+  交叉轴方向用 align-items: 同上，不过没有后两个属性，替换为baseline,strech(默认值)
+
+  子元素 flex: 这个是flex-grow flex-shrink flex-basis 三个值的缩写
+ 
+  最常用的就是flex:1  表示flex-grow  flex:1 1; 表示flex-grow:1; flex-shrink:1;
+
+  flex-basis : 可以为px em auto 和content；
+
+  flex-direction: row colomn row-reverse
+
+  flex-wrap: wrap nowrap wrap-reverse 
+
+  上面这俩 合起来就是flex-flow(不算很常用)
+
+  父元素还一个不算常用的  align-content(他是按交叉轴排序的，属性同align-items,不过删除了baseline,多了space-between,space-around,他是多行排列时用的)
+
+  align-self: 可以覆盖父元素的align-items
+
+  最后还有一个order属性 ，属性值越小，排列越靠前
+
+- Web 优化
+
+  1. html层
+    
+    - css的link写在head里
+    - script标签写在body之前
+    - 利用defer或者async属性
+  
+      defer是按照先后顺序（现实中不一定，也不一定在DOMContentLoaded事件完成前执行），会马上下载，但是延迟执行，遇到</html>标签后才会开始加载
+    
+      async不会按照先后顺序,也就是不按顺序，下载完就执行。
+
+      > [参考一个解释](https://segmentfault.com/q/1010000000640869)
+    
+    - 语义化，用section,article,aside,main,header,footer等语义化标签
+    - meta keywords description描述
+    - 页面H1的利用，搜索优化就少用ajax请求数据
+    - 缓存，if-modified-since/last-modified(这个只是到秒级别)  E-tag/if-none-match，服务端可以发cache-control 和expire,etag弊端，负载均衡
+      > [参考](http://tech110.blog.51cto.com/438717/549764)
+   
+  2. css层
+
+    - 减少层级
+    - 尽量避免通配符
+    - 尽量避免使用import
+    - 尽量使用缩写（颜色，属性值合并等）
+    - 尽量缩写类名
+    - 雪碧图
+
+  3. js层次
+
+    - 尽可能少的dom操作
+    - 懒加载
+    - localStorage，sessionStorage
+    - webpack打包外部请求文件为一个文件
+    - 小图片转化为base64，牺牲带宽减少请求
+
+  4. 其他方面
+
+    - CDN加速
+    - 减少301重定向
+    - gzip压缩
+
+- http常用状态码
+  
+  > [301,302参考](http://www.cnblogs.com/5207/p/5908354.html)
+
+  1. 200
+  2. 301
+  3. 304
+  4. 403
+  4. 404
+  5. 500
+  6. 502
+
+- http2.0
+
+  - url输入之后到底发生了什么 [参考](https://segmentfault.com/a/1190000006879700)
+
+  - [参考地址](http://www.alloyteam.com/2016/07/httphttp2-0spdyhttps-reading-this-is-enough/)
+
+  - [你应该知道的http1.1 http2.0](http://www.alloyteam.com/2016/07/httphttp2-0spdyhttps-reading-this-is-enough/#prettyPhoto) 
+  
