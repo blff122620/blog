@@ -950,8 +950,13 @@ reduce([1,2,3,4])(add) ; // 返回10
 - http2.0
 
   - url输入之后到底发生了什么 [参考](https://segmentfault.com/a/1190000006879700)
+  - [浏览器渲染原理简析](https://x-front-team.github.io/2016/10/28/%E6%B5%85%E8%B0%88%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9A%84%E6%B8%B2%E6%9F%93%E5%8E%9F%E7%90%86/)
 
-  - [参考地址](http://www.alloyteam.com/2016/07/httphttp2-0spdyhttps-reading-this-is-enough/)
+  - [图解SSL/TLS](http://www.ruanyifeng.com/blog/2014/09/illustration-ssl.html)
+  - [图解HTTPS](http://www.cnblogs.com/zhuqil/archive/2012/07/23/2604572.html)
+  - [白话解释 对称加密算法 VS 非对称加密算法](https://segmentfault.com/a/1190000004461428)
 
   - [你应该知道的http1.1 http2.0](http://www.alloyteam.com/2016/07/httphttp2-0spdyhttps-reading-this-is-enough/#prettyPhoto) 
+
+  - [这个文章对对称加密，非对称加密 https讲的最好](http://www.cnblogs.com/JeffreySun/archive/2010/06/24/1627247.html)
   
