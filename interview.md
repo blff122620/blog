@@ -894,6 +894,9 @@ reduce([1,2,3,4])(add) ; // 返回10
 
 - Web 优化
 
+  - 尾递归优化
+  - 比如懒本身，还有里面用到的throttle
+
   1. html层
     
     - css的link写在head里
@@ -960,3 +963,101 @@ reduce([1,2,3,4])(add) ; // 返回10
 
   - [这个文章对对称加密，非对称加密 https讲的最好](http://www.cnblogs.com/JeffreySun/archive/2010/06/24/1627247.html)
   
+- 观察者模式
+
+  ```javascript
+  class Observer{
+    constructor() {
+      this.events = {}; // 订阅事件存储  
+    }
+    subscribe(name,fn,unshift){
+      if(!fn ){
+        throw new Error('please define fn');
+      }
+      if(typeof fn !== 'function'){
+        throw new Error('fn not a function.');
+      }
+      if(typeof name !== 'string'){
+        throw new Error('name must be string.');
+      }
+      if(this.events[name] === undefined){
+        // 未定义，那么就新建事件
+        this.events[name] = []; 
+      }
+      unshift ? this.events[name].unshift(fn): this.events[name].push(fn);
+    }
+    fire(name,args){
+      if(this.events[name] === undefined){
+        throw new Error('please define events');
+      }
+      let type = {
+        name,
+        args: args || {},
+      };
+      this.events[name].forEach(item => {
+        item.call(this,type);
+      });
+    }
+
+    rm(name,fn){
+      this.events[name] = this.events[name].filter(item => {
+        if(item === fn){
+          return false;
+        }
+        return true;
+      });
+    }
+  }
+
+  function fn(e){
+    console.log(`${e.name}: ${e.args.msg}`)
+  }
+
+  let a = new Observer();
+
+  ```
+
+- 另一个懒加载
+
+  ```javascript
+  function throttle(fn,ctx){
+    let prev = null,
+      now = null,
+      timeout = 5000;
+    return function(...args){
+      now = new Date();
+      if(!prev){
+        prev = now;
+      }
+      if(now - prev > timeout){
+        fn.apply(ctx || null, args);
+        prev = now;
+      }
+      
+    };
+  }
+
+  // 已经到了视口里
+  function inSight(ele){
+    const eleRect = ele.getBoundingClientRect();
+    const top = eleRect.top;
+    const left = eleRect.left;
+    const threshold = 100;
+    return top <= clientHeight + threshold && left <= clientWidth + threshold;
+  }
+
+  function checkImg(imgs){
+    const imgArr = Array.from(imgs);
+    imgArr.forEach(img => {
+      if(inSight(img)){
+        loadImg(img);
+      }
+    });
+  }
+
+  function loadImg(img){
+    img && img.src && img.src = img.dataset.src;
+  }
+  window.load = checkImg($$('img'));
+  window.scroll = throttl(checkImg)
+  ```
