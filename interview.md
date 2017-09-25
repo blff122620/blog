@@ -1061,3 +1061,23 @@ reduce([1,2,3,4])(add) ; // 返回10
   window.load = checkImg($$('img'));
   window.scroll = throttl(checkImg)
   ```
+ 
+- 懒加载
+
+  webpack中应用，其实就是分模块打包，然后根据事件的不同区按需加载
+  [去webpack官网看看](https://doc.webpack-china.org/guides/lazy-loading)
+  
+- web重构
+
+  重构人
+  重构理念
+  不光追求技术
+  不光追求设计稿
+  不光追求浏览器兼容性
+  重要的是基础概念
+  1. 最早前，04年，table->div
+  2. 还原一款款的设计稿（4天设计-> 一天还原）
+    并不是100%还原（一种修改（在还原过程中发现以前的代码结构是否合理，不合理就改），内部结构更容易，有节制的整理代码，使bug产生率最小化，ie）
+  3. h j c 分离 优化
+  4. 交互、用研
+  
