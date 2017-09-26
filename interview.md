@@ -937,6 +937,8 @@ reduce([1,2,3,4])(add) ; // 返回10
     - CDN加速
     - 减少301重定向
     - gzip压缩
+    - GMV
+    - [JD的优化例子](http://www.infoq.com/cn/articles/Jingdong-three-list-page-continuous-structure-optimization?utm_source=articles_about_optimize&utm_medium=link&utm_campaign=optimize)
 
 - http常用状态码
   
@@ -1080,4 +1082,5 @@ reduce([1,2,3,4])(add) ; // 返回10
     并不是100%还原（一种修改（在还原过程中发现以前的代码结构是否合理，不合理就改），内部结构更容易，有节制的整理代码，使bug产生率最小化，ie）
   3. h j c 分离 优化
   4. 交互、用研
+  5. 工程化（css 组件化 ，div优化）
   
