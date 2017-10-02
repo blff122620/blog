@@ -585,6 +585,24 @@ function add(a,b,index,arr){
 
 reduce([1,2,3,4])(add) ; // 返回10
 
+// 函数防抖的应用
+function debounce(fn, timeout = 250){
+    let timer = null;
+    return function(...args){
+      clearTimeout(timer);
+      const ctx = this;
+      timer = setTimeout(fn.bind(ctx, ...args), timeout);
+    };
+  }
+
+  function move(e){
+    console.log(e);
+  }
+  const newMove = debounce(move);
+  window.onmousemove = function(e){
+    newMove(e);
+  }
+
 
 ```
 
