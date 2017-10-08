@@ -936,29 +936,50 @@ function debounce(fn, timeout = 250){
   1. css层
 
     - 减少层级, bem的方式，media__xxx(编译sass)
+
     - 尽量避免通配符
+
     - 尽量避免使用import
+
     - 尽量使用缩写（颜色，属性值合并等）
+
     - 尽量缩写类名
+
     - calc少用为好，局部可以用flex
+
     - 雪碧图
+
 
   1. js层次
 
     - for最快 for of 比 forEach稍快 for in最慢
+
     - if else & switch & 查找表
+
     - 事件委托
+
     - 更快速的数据访问，作用域链问题 ，局部变量保存
+
     - eval 以及类eval问题（setTimeout new Function）
+
     - 尽可能少的dom操作
+
     - Dom操作优化，用document.createDocumentFragment()
+
     - 上面这个是减少重绘重排，动画尽量脱离文档流，创建cloneNode dom副本，两次操作dom, display:none 再出现，两次操作
+
     - 尽量少去改变作用域链，try catch， with
+
     - 懒加载
+
     - localStorage，sessionStorage
-    - cookie 传递， 静态资源单独，减少cookie传递的贷款
+
+    - cookie 传递， 静态资源单独，减少cookie传递的带宽
+
     - webpack打包外部请求文件为少数几个文件，不变的打包为一个
+
     - 小图片转化为base64，牺牲带宽减少请求
+
 
   1. 其他方面
 
