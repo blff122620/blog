@@ -74,15 +74,15 @@
     1. 函数没有返回值时，默认返回undefined。
 
 - this的原理
-  
-  [引用地址](http://blog.anchengjian.com/#/posts/2016/js中this的一些总结.md) 
+
+  [引用地址](http://blog.anchengjian.com/#/posts/2016/js中this的一些总结.md)
 
 - 数据类型
-  
+
   undefined 派生自 null 所以ECMAScript262 规定 undefined == null
 
 - 理解this
-  
+
   [彻底理解this](http://blog.anchengjian.com/#/posts/2016/js中this的一些总结.md)
 
   > 一些重点
@@ -129,7 +129,7 @@
       byte4 = 65535;
     let size = 0;
     for(let i =0; i<str.length; i++){
-      
+
       if(str[i] > byte2){
         size += 2;
       }
@@ -192,14 +192,14 @@
         else{
           target[key] = value;
         }
-        
+
       }
       return target;
     }
   }
 
   function extend(...args){
-    let deep, 
+    let deep,
       target = args[0] || {},
       src,
       key,
@@ -215,7 +215,7 @@
     for(;index<len;index++){
       // 开始循环扩展每个形参
       option = args[index];
-      
+
       src = copy(option,deep);
       for(key in src){
         target[key] = src[key];
@@ -242,7 +242,7 @@
           callback();
         }
       };
-    } 
+    }
     else {
     // Others: Firefox, Safari, Chrome, and Opera
       script.onload = function(){
@@ -433,7 +433,7 @@ let factorial = (() => {
     if(typeof number != 'number'){
       return 0;
     }
-    
+
     if(number == 0){
       console.log(`我被调用了${index}次`);
       index = 0;
@@ -482,10 +482,10 @@ let reduce = (()=>{
       index = 0;
       return arr[0];
     }
-    
+
     prev = fn(arr[0],arr[1],index++,arr);
     arr.splice(0,2,prev);
-    return reduce(fn,arr); 
+    return reduce(fn,arr);
   };
   return redu;
 })();
@@ -520,7 +520,7 @@ let reduce = (()=>{
       prev = this[index];
       index += 1;
     }
-    
+
     while(index < this.length){
       if(index in this){
         prev = args[0].call(this,prev,this[index],index,this);
@@ -548,13 +548,13 @@ let reduce = ((that)=>{
   let redu = (...args) => {
     if(args.length >=2){
       prev = args[1];//有初始值的情况
-      
+
       if(that.length == 0){
         return prev;
       }
     }
     else{
-      
+
       if(that.length == 0){
         return '出错了，啥都没有';
       }
@@ -565,7 +565,7 @@ let reduce = ((that)=>{
       prev = that[index];
       index += 1;
     }
-    
+
     while(index < that.length){
       if(index in that){
         prev = args[0].call(that,prev,that[index],index,that);
@@ -626,7 +626,7 @@ function debounce(fn, timeout = 250){
   ```
 
 - 请描述一个网页从开始请求道最终显示的完整过程？
-  
+
   1. 浏览器中输入网址；
   1. 发送至DNS服务器并获得域名对应的WEB服务器IP地址；
   1. 与WEB服务器建立TCP连接；
@@ -637,11 +637,11 @@ function debounce(fn, timeout = 250){
 
 - 行内元素 空元素 块级元素
 
-  input span img a label 
+  input span img a label
 
-  br hr 
+  br hr
 
-  div ol ul li dl dt dd h1 form 
+  div ol ul li dl dt dd h1 form
 
 - html5 新增 删除
 
@@ -754,40 +754,40 @@ function debounce(fn, timeout = 250){
 
   [面试备注](https://segmentfault.com/a/1190000009200927)
 
-- 实现一个LazyMan 
+- 实现一个LazyMan
 
   > 实现一个LazyMan，可以按照以下方式调用:
-  > 
+  >
   > LazyMan("Hank")输出:
-  > 
+  >
   > Hi! This is Hank!
   >  
   > LazyMan("Hank").sleep(10).eat("dinner")输出
-  > 
+  >
   > Hi! This is Hank!
-  > 
+  >
   > //等待10秒..
-  > 
+  >
   > Wake up after 10
-  > 
+  >
   > Eat dinner~
   >  
   > LazyMan("Hank").eat("dinner").eat("supper")输出
-  > 
+  >
   > Hi This is Hank!
-  > 
+  >
   > Eat dinner~
-  > 
+  >
   > Eat supper~
   >  
   > LazyMan("Hank").sleepFirst(5).eat("supper")输出
-  > 
+  >
   > //等待5秒
-  > 
+  >
   > Wake up after 5
-  > 
+  >
   > Hi This is Hank!
-  > 
+  >
   > Eat supper
   >  
   > 以此类推。
@@ -819,16 +819,16 @@ function debounce(fn, timeout = 250){
       let func = task.fn,
         args = task.args;
       switch(func){
-        case 'eat': 
+        case 'eat':
           eat.apply(null,args);
           break;
-        case 'sleep': 
+        case 'sleep':
           sleep.apply(null,args);
           break;
-        case 'sleepFirst': 
+        case 'sleepFirst':
           sleepFirst.apply(null,args);
           break;
-        case 'lazyMan': 
+        case 'lazyMan':
           lazyMan.apply(null,args);
           break;
       }
@@ -868,7 +868,7 @@ function debounce(fn, timeout = 250){
       setTimeout(() => {
         log("Wake up after "+ time);
         publish();
-      }, time * 1000); 
+      }, time * 1000);
     }
 
     window.LazyMan = function(name){
@@ -887,20 +887,20 @@ function debounce(fn, timeout = 250){
   > [一劳永逸flex](https://juejin.im/post/58e3a5a0a0bb9f0069fc16bb)
 
   首先说下flex的相关的css属性吧，display:flex,首先要设置这个，将dom元素变为FFC。
-  
+
   主轴方向利用参数 justify-content: 用的最多的可能就是center了，flex-start(默认值), flex-end，space-between,space-around 这两个并不常用
 
   交叉轴方向用 align-items: 同上，不过没有后两个属性，替换为baseline,strech(默认值)
 
   子元素 flex: 这个是flex-grow flex-shrink flex-basis 三个值的缩写
- 
+
   最常用的就是flex:1  表示flex-grow  flex:1 1; 表示flex-grow:1; flex-shrink:1;
 
   flex-basis : 可以为px em auto 和content；
 
   flex-direction: row colomn row-reverse
 
-  flex-wrap: wrap nowrap wrap-reverse 
+  flex-wrap: wrap nowrap wrap-reverse
 
   上面这俩 合起来就是flex-flow(不算很常用)
 
@@ -916,26 +916,26 @@ function debounce(fn, timeout = 250){
   - 比如懒本身，还有里面用到的throttle
 
   1. html层
-    
+
     - css的link写在head里
     - script标签写在body之前
     - 利用defer或者async属性
-  
+
       defer是按照先后顺序（现实中不一定，也不一定在DOMContentLoaded事件完成前执行），会马上下载，但是延迟执行，遇到</html>标签后才会开始加载
-    
+
       async不会按照先后顺序,也就是不按顺序，下载完就执行。
 
       > [参考一个解释](https://segmentfault.com/q/1010000000640869)
-    
+
     - 语义化，用section,article,aside,main,header,footer等语义化标签
     - meta keywords description描述
     - 页面H1的利用，搜索优化就少用ajax请求数据
     - 缓存，if-modified-since/last-modified(这个只是到秒级别)  E-tag/if-none-match，服务端可以发cache-control 和expire,etag弊端，负载均衡
       > [参考](http://tech110.blog.51cto.com/438717/549764)
-   
-  2. css层
 
-    - 减少层级, bem的方式， media__xxx(编译sass)
+  1. css层
+
+    - 减少层级, bem的方式，media__xxx(编译sass)
     - 尽量避免通配符
     - 尽量避免使用import
     - 尽量使用缩写（颜色，属性值合并等）
@@ -943,8 +943,8 @@ function debounce(fn, timeout = 250){
     - calc少用为好，局部可以用flex
     - 雪碧图
 
-  3. js层次
-    
+  1. js层次
+
     - for最快 for of 比 forEach稍快 for in最慢
     - if else & switch & 查找表
     - 事件委托
@@ -960,7 +960,7 @@ function debounce(fn, timeout = 250){
     - webpack打包外部请求文件为少数几个文件，不变的打包为一个
     - 小图片转化为base64，牺牲带宽减少请求
 
-  4. 其他方面
+  1. 其他方面
 
     - CDN加速
     - 减少301重定向
@@ -969,7 +969,7 @@ function debounce(fn, timeout = 250){
     - [JD的优化例子](http://www.infoq.com/cn/articles/Jingdong-three-list-page-continuous-structure-optimization?utm_source=articles_about_optimize&utm_medium=link&utm_campaign=optimize)
 
 - http常用状态码
-  
+
   > [301,302参考](http://www.cnblogs.com/5207/p/5908354.html)
 
   1. 200
@@ -989,10 +989,10 @@ function debounce(fn, timeout = 250){
   - [图解HTTPS](http://www.cnblogs.com/zhuqil/archive/2012/07/23/2604572.html)
   - [白话解释 对称加密算法 VS 非对称加密算法](https://segmentfault.com/a/1190000004461428)
 
-  - [你应该知道的http1.1 http2.0](http://www.alloyteam.com/2016/07/httphttp2-0spdyhttps-reading-this-is-enough/#prettyPhoto) 
+  - [你应该知道的http1.1 http2.0](http://www.alloyteam.com/2016/07/httphttp2-0spdyhttps-reading-this-is-enough/#prettyPhoto)
 
   - [这个文章对对称加密，非对称加密 https讲的最好](http://www.cnblogs.com/JeffreySun/archive/2010/06/24/1627247.html)
-  
+
 - 观察者模式
 
   ```javascript
@@ -1012,7 +1012,7 @@ function debounce(fn, timeout = 250){
       }
       if(this.events[name] === undefined){
         // 未定义，那么就新建事件
-        this.events[name] = []; 
+        this.events[name] = [];
       }
       unshift ? this.events[name].unshift(fn): this.events[name].push(fn);
     }
@@ -1063,7 +1063,7 @@ function debounce(fn, timeout = 250){
         fn.apply(ctx || null, args);
         prev = now;
       }
-      
+
     };
   }
 
@@ -1091,34 +1091,34 @@ function debounce(fn, timeout = 250){
   window.load = checkImg($$('img'));
   window.scroll = throttl(checkImg)
   ```
- 
+
 - 懒加载
 
   webpack中应用，其实就是分模块打包，然后根据事件的不同区按需加载
   [去webpack官网看看](https://doc.webpack-china.org/guides/lazy-loading)
-  
+
 - web重构
 
   1. 重构人
-  
+
   2. 重构理念
-  
+
   3. 不光追求技术
-  
+
   4. 不光追求设计稿
-  
+
   5. 不光追求浏览器兼容性
-  
+
   6. 重要的是基础概念
-  
+
   1. 最早前，04年，table->div
-  
+
   2. 还原一款款的设计稿（4天设计-> 一天还原）
     并不是100%还原（一种修改（在还原过程中发现以前的代码结构是否合理，不合理就改），内部结构更容易，有节制的整理代码，使bug产生率最小化，ie）
-    
+
   3. h j c 分离 优化
-  
+
   4. 交互、用研
-  
+
   5. 工程化（css 组件化 ，div优化）
   
