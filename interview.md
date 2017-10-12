@@ -602,6 +602,34 @@ function debounce(fn, timeout = 250){
   window.onmousemove = function(e){
     newMove(e);
   }
+  // 函数节流
+  function throttle(fn, timeout = 1000){
+    let timer = null,
+      prev = undefined;
+    return function(...args){
+      const ctx = this;
+
+      const now = new Date();
+
+      const dur = now - prev;
+
+      if(!prev){
+        prev = now;
+      }
+      if(dur < timeout){
+        clearTimeout(timer);
+        timer = setTimeout(function(){
+          prev = new Date();
+          fn.apply(ctx, args);
+        }, timeout - dur);
+      }
+      else{
+        prev = now;
+        fn.apply(ctx, args);
+      }
+
+    }
+  }
 
 
 ```
