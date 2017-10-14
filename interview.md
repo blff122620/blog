@@ -1171,7 +1171,10 @@ function debounce(fn, timeout = 250){
 
   5. 工程化（css 组件化 ，div优化）
   
-# 可拖动div元素的原生实现
+- 可拖动div元素的原生实现
 
   [实现地址](http://blog.bx1987.com/posts/59d888af4408eb7e4d96c218)
   
+- 置换元素
+
+  img input button select textarea iframe cancas等
