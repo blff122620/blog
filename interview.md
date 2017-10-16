@@ -1188,3 +1188,6 @@ function debounce(fn, timeout = 250){
     }
   }
   ```
+
+- delegated event
+  [codepen地址](https://codepen.io/beau01/pen/rGdNoO)
