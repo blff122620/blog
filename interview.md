@@ -602,8 +602,8 @@ function debounce(fn, timeout = 250){
   window.onmousemove = function(e){
     newMove(e);
   }
-  // 函数节流
-  function throttle(fn, timeout = 1000){
+  // 函数节流
+  function throttle(fn, timeout = 1000){
     let timer = null,
       prev = undefined;
     return function(...args){
@@ -963,9 +963,9 @@ function debounce(fn, timeout = 250){
 
   1. css层
 
-    - 减少层级, bem的方式，media__xxx(编译sass)
+    - 减少层级, bem的方式，media__xxx(编译sass)
 
-    - 尽量避免通配符
+    - 尽量避免通配符
 
     - 尽量避免使用import
 
@@ -973,40 +973,40 @@ function debounce(fn, timeout = 250){
 
     - 尽量缩写类名
 
-    - calc少用为好，局部可以用flex
+    - calc少用为好，局部可以用flex
 
-    - 雪碧图
+    - 雪碧图
 
 
   1. js层次
 
-    - for最快 for of 比 forEach稍快 for in最慢
+    - for最快 for of 比 forEach稍快 for in最慢
 
-    - if else & switch & 查找表
+    - if else & switch & 查找表
 
-    - 事件委托
+    - 事件委托
 
-    - 更快速的数据访问，作用域链问题 ，局部变量保存
+    - 更快速的数据访问，作用域链问题 ，局部变量保存
 
-    - eval 以及类eval问题（setTimeout new Function）
+    - eval 以及类eval问题（setTimeout new Function）
 
-    - 尽可能少的dom操作
+    - 尽可能少的dom操作
 
-    - Dom操作优化，用document.createDocumentFragment()
+    - Dom操作优化，用document.createDocumentFragment()
 
-    - 上面这个是减少重绘重排，动画尽量脱离文档流，创建cloneNode dom副本，两次操作dom, display:none 再出现，两次操作
+    - 上面这个是减少重绘重排，动画尽量脱离文档流，创建cloneNode dom副本，两次操作dom, display:none 再出现，两次操作
 
-    - 尽量少去改变作用域链，try catch， with
+    - 尽量少去改变作用域链，try catch， with
 
-    - 懒加载
+    - 懒加载
 
     - localStorage，sessionStorage
 
-    - cookie 传递， 静态资源单独，减少cookie传递的带宽
+    - cookie 传递， 静态资源单独，减少cookie传递的带宽
 
-    - webpack打包外部请求文件为少数几个文件，不变的打包为一个
+    - webpack打包外部请求文件为少数几个文件，不变的打包为一个
 
-    - 小图片转化为base64，牺牲带宽减少请求
+    - 小图片转化为base64，牺牲带宽减少请求
 
 
   1. 其他方面
@@ -1015,7 +1015,7 @@ function debounce(fn, timeout = 250){
     - 减少301重定向
     - gzip压缩
     - GMV
-    - [JD的优化例子](http://www.infoq.com/cn/articles/Jingdong-three-list-page-continuous-structure-optimization?utm_source=articles_about_optimize&utm_medium=link&utm_campaign=optimize)
+    - [JD的优化例子](http://www.infoq.com/cn/articles/Jingdong-three-list-page-continuous-structure-optimization?utm_source=articles_about_optimize&utm_medium=link&utm_campaign=optimize)
 
 - http常用状态码
 
@@ -1143,38 +1143,38 @@ function debounce(fn, timeout = 250){
 
 - 懒加载
 
-  webpack中应用，其实就是分模块打包，然后根据事件的不同区按需加载
-  [去webpack官网看看](https://doc.webpack-china.org/guides/lazy-loading)
+  webpack中应用，其实就是分模块打包，然后根据事件的不同区按需加载
+  [去webpack官网看看](https://doc.webpack-china.org/guides/lazy-loading)
 
 - web重构
 
-  1. 重构人
+  1. 重构人
 
-  2. 重构理念
+  2. 重构理念
 
-  3. 不光追求技术
+  3. 不光追求技术
 
-  4. 不光追求设计稿
+  4. 不光追求设计稿
 
-  5. 不光追求浏览器兼容性
+  5. 不光追求浏览器兼容性
 
-  6. 重要的是基础概念
+  6. 重要的是基础概念
 
-  1. 最早前，04年，table->div
+  1. 最早前，04年，table->div
 
-  2. 还原一款款的设计稿（4天设计-> 一天还原）
-    并不是100%还原（一种修改（在还原过程中发现以前的代码结构是否合理，不合理就改），内部结构更容易，有节制的整理代码，使bug产生率最小化，ie）
+  2. 还原一款款的设计稿（4天设计-> 一天还原）
+    并不是100%还原（一种修改（在还原过程中发现以前的代码结构是否合理，不合理就改），内部结构更容易，有节制的整理代码，使bug产生率最小化，ie）
 
-  3. h j c 分离 优化
+  3. h j c 分离 优化
 
-  4. 交互、用研
+  4. 交互、用研
 
-  5. 工程化（css 组件化 ，div优化）
-  
+  5. 工程化（css 组件化 ，div优化）
+
 - 可拖动div元素的原生实现
 
-  [实现地址](http://blog.bx1987.com/posts/59d888af4408eb7e4d96c218)
-  
+  [实现地址](http://blog.bx1987.com/posts/59d888af4408eb7e4d96c218)
+
 - 置换元素
 
-  img input button select textarea iframe cancas等
+  img input button select textarea iframe cancas等
