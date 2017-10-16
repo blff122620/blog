@@ -1179,7 +1179,12 @@ function debounce(fn, timeout = 250){
 
   img input button select textarea iframe cancas等
 
-- some
-  1. 12312
-  1. 222222
-  1. 1231
+- 计算字符串所占字节数的移位方法
+  ```javascript
+  function s(str){
+    for(const a of str){
+      console.log(a.codePointAt(a) > 0xffff);
+      console.log(a.codePointAt(a) > 0x00ff);
+    }
+  }
+  ```
