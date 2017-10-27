@@ -1191,6 +1191,6 @@ function debounce(fn, timeout = 250){
 
 - delegated event
   * [codepen地址](https://codepen.io/beau01/pen/rGdNoO)
-  
+
 - es2015 es2016 es2017
-  * 2016只多了 Array.prototype.includes
+  * 2016只多了 Array.prototype.includes
